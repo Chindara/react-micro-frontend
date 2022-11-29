@@ -7,21 +7,21 @@ const cors = require('./config/cors-config');
 const sampleRouter = require('./routes/sample-routes');
 const app = express();
 
-app.use(logger('dev'));
+app.use(logger('combined'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors);
 
 app.use('/sample', sampleRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
 	next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res) {
+app.use((err, req, res) => {
 	// set locals, only providing error in development
 	res.locals.message = err.message;
 	res.locals.error = req.app.get('env') === 'development' ? err : {};
