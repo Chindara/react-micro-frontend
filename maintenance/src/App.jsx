@@ -1,11 +1,6 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Counter } from "./components/Counter";
-import "./index.css";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
 
-const App = () => (
-  <div className="container">
-    <Counter />
-  </div>
-);
-ReactDOM.render(<App />, document.getElementById("app"));
+const App = () => <div className='container'>Maintenance itself</div>;
+ReactDOM.render(<App />, document.getElementById('app'));
