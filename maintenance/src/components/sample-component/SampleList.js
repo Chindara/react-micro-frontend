@@ -4,6 +4,12 @@ import SampleService from '../../services/SampleService';
 
 import SampleForm from './SampleForm';
 import Model from './Model';
+import {
+	setAlertSuccess,
+	setAlertWarning,
+	setAlertError,
+} from '../alert/Alert';
+import { SAMPLE_ALERT } from '../../constants/Message';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
@@ -39,6 +45,7 @@ export default function SampleList() {
 	const [openModel, setOpenModel] = useState(false);
 	const [error, setError] = useState([]);
 	const [sample, setSample] = useState(initialSampleState);
+	const [sampleId, setSampleId] = useState('');
 
 	useEffect(() => {
 		retrieveSamples();
@@ -51,7 +58,7 @@ export default function SampleList() {
 			setSamples(response.data.samples);
 			setFetchingData(false);
 		} catch (error) {
-			setAlerDanger(USER_ALERT.Error.Title, USER_ALERT.Error.Get);
+			setAlertError(SAMPLE_ALERT.Error.Get);
 		}
 	};
 
@@ -67,10 +74,11 @@ export default function SampleList() {
 				let response = await SampleService.getSampleById(item);
 				setSample(response.data);
 			}
+
 			setOpenModel(true);
 			setModelType('view');
 		} catch (error) {
-			setAlerDanger(USER_ALERT.Error.Title, USER_ALERT.Error.Get);
+			setAlertError(SAMPLE_ALERT.Error.Get);
 		}
 	};
 
@@ -81,23 +89,26 @@ export default function SampleList() {
 				console.log(response);
 				setSample(response.data);
 			}
+			setSampleId(item);
 			setError([]);
 			setOpenModel(true);
 			setModelType('edit');
 		} catch (error) {
-			setAlerDanger(USER_ALERT.Error.Title, USER_ALERT.Error.Get);
+			setAlertError(SAMPLE_ALERT.Error.Get);
 		}
 	};
 
 	const openInDeleteModal = async (item) => {
-		// try {
-		// 	setUserId(item);
-		// 	let response = await UserDataService.get(item);
-		// 	setCurrentUser(response.data.user);
-		// 	setOpenDeleteModal(true);
-		// } catch (error) {
-		// 	setAlerDanger(USER_ALERT.Error.Title, USER_ALERT.Error.Get);
-		// }
+		try {
+			await SampleService.deleteSample(item);
+
+			let res = await SampleService.getAllSample();
+
+			setSamples(res.data.samples);
+			setAlertSuccess(SAMPLE_ALERT.Success.Delete);
+		} catch (error) {
+			setAlertError(SAMPLE_ALERT.Error.Get);
+		}
 	};
 
 	const columns = [
@@ -170,6 +181,17 @@ export default function SampleList() {
 					label='Edit'
 					onClick={() => {
 						openInEditModal(sample.id);
+					}}
+					sx={{ borderRadius: 1 }}
+					color='primary'
+					showInMenu
+				/>,
+				<GridActionsCellItem
+					icon={<DriveFileRenameOutlineOutlinedIcon fontSize='small' />}
+					title='Delete Sample'
+					label='Delete'
+					onClick={() => {
+						openInDeleteModal(sample.id);
 					}}
 					sx={{ borderRadius: 1 }}
 					color='primary'
@@ -274,6 +296,7 @@ export default function SampleList() {
 										setSamples={setSamples}
 										sample={sample}
 										setSample={setSample}
+										sampleId={sampleId}
 									/>
 								</Model>
 							</CardContent>

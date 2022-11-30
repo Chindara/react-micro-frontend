@@ -3,8 +3,12 @@ import React from 'react';
 import SampleService from '../../services/SampleService';
 
 import { SAMPLE_VALIDATION_MESSAGE } from '../../constants/Message';
-import setAlert, { setAlerDanger, setAlerWarning } from '../Alert/Alert';
-import { USER_ALERT } from '../../constants/Message';
+import {
+	setAlertSuccess,
+	setAlertWarning,
+	setAlertError,
+} from '../alert/Alert';
+import { SAMPLE_ALERT } from '../../constants/Message';
 
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -26,6 +30,7 @@ export default function SampleForm({
 	setError,
 	sample,
 	setSample,
+	sampleId,
 }) {
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
@@ -36,7 +41,6 @@ export default function SampleForm({
 	};
 
 	const saveSample = async (e) => {
-		console.log('ave');
 		e.preventDefault();
 		const errorList = [];
 
@@ -72,8 +76,6 @@ export default function SampleForm({
 			errorList.push('date');
 		}
 
-		console.log('above', errorList.length);
-
 		setError(errorList);
 
 		if (errorList.length === 0) {
@@ -87,7 +89,8 @@ export default function SampleForm({
 			try {
 				if (modelType === 'create') await SampleService.createSample(data);
 
-				if (modelType === 'edit') await SampleService.updateSample(data);
+				if (modelType === 'edit')
+					await SampleService.updateSample(sampleId, data);
 
 				let res = await SampleService.getAllSample();
 
@@ -95,9 +98,17 @@ export default function SampleForm({
 
 				setSample(initialSampleState);
 				setOpenModel(false);
-				setAlert(USER_ALERT.Success.Title, USER_ALERT.Success.Create);
+				setAlertSuccess(
+					modelType === 'create'
+						? SAMPLE_ALERT.Success.Create
+						: SAMPLE_ALERT.Success.Update
+				);
 			} catch (error) {
-				setAlerDanger(USER_ALERT.Error.Title, USER_ALERT.Error.Create);
+				setAlertError(
+					modelType === 'create'
+						? SAMPLE_ALERT.Error.Create
+						: SAMPLE_ALERT.Error.Update
+				);
 			}
 		}
 	};

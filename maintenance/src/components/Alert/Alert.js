@@ -1,14 +1,14 @@
-import { toastr } from 'react-redux-toastr';
-import './custom.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function setAlert(title, message) {
-	toastr.success(title, message);
+export function setAlertSuccess(message) {
+	toast.success(message);
 }
 
-export function setAlerDanger(title, message) {
-	toastr.error(title, message);
+export function setAlertWarning(message) {
+	toast.warning(message);
 }
 
-export function setAlerWarning(title, message) {
-	toastr.warning(title, message);
+export function setAlertError(message) {
+	toast.error(message);
 }
