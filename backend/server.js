@@ -7,7 +7,12 @@ const cors = require('./config/cors-config');
 const sampleRouter = require('./routes/sample-routes');
 const app = express();
 
-app.use(logger('combined'));
+logger.token('date', () => new Date().toLocaleString());
+app.use(
+	logger(
+		':remote-addr - :remote-user [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"'
+	)
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

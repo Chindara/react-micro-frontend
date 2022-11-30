@@ -17,7 +17,7 @@ const getById = async (req, res, next) => {
 	try {
 		const sample = await Sample.findById(id);
 
-		res.status(STATUS_CODE.Success).json(sample.toObject({ getters: true }));
+		res.status(200).json(sample.toObject({ getters: true }));
 	} catch (err) {
 		console.log(err);
 		res.status(500).json({ message: 'Error Occured' });
@@ -57,7 +57,7 @@ const update = async (req, res, next) => {
 		sample.date = date;
 
 		await sample.save();
-		res.status(201).json({ sampleModified: true });
+		res.status(200).json({ sampleModified: true });
 	} catch (err) {
 		console.log(err);
 		res.status(500).json({ message: 'Error Occured' });
@@ -72,6 +72,7 @@ const remove = async (req, res, next) => {
 		if (!sample) res.status(404).json({ message: 'Not Found' });
 
 		await sample.remove();
+		res.status(200).json({ sampleDeleted: true });
 	} catch (err) {
 		console.log(err);
 		res.status(500).json({ message: 'Error Occured' });
