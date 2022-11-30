@@ -4,7 +4,9 @@ const getAll = async (req, res, next) => {
 	try {
 		const samples = await Sample.find();
 
-		res.status(200).json({ samples });
+		res.status(200).json({
+			samples: samples.map((sample) => sample.toObject({ getters: true })),
+		});
 	} catch (err) {
 		console.log(err);
 		res.status(500).json({ message: 'Error Occured' });

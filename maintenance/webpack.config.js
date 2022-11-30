@@ -47,6 +47,7 @@ module.exports = {
 			exposes: {
 				'./ChildOne': './src/components/one/ChildOne',
 				'./ChildTwo': './src/components/two/ChildTwo',
+				'./Sample': './src/components/sample-component/SampleList',
 			},
 			shared: {
 				...deps,

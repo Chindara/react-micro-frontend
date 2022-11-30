@@ -1,0 +1,16 @@
+.alertify-notifier .ajs-message.ajs-success {
+  background: rgba(91, 189, 114, 0.95);
+  text-align: center;
+  color: #fff;
+}
+
+.alertify-notifier .ajs-message.ajs-error {
+  background: rgba(217, 92, 92, 0.95);
+  text-align: center;
+  color: #fff;
+}
+
+.alertify-notifier .ajs-message.ajs-warning {
+  background: rgba(255, 230, 0, 0.95);
+  text-align: center;
+}

@@ -15,6 +15,12 @@ const sidebarItems = [
 		to: '/child-two',
 		icon: <PeopleAltIcon />,
 	},
+	{
+		id: 3,
+		name: 'Sample',
+		to: '/sample',
+		icon: <PeopleAltIcon />,
+	},
 ];
 
 export default sidebarItems;
