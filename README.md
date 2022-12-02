@@ -17,3 +17,11 @@ npx create-mf-app
 ```
 npm run start:dev
 ```
+### Core
+```
+npm run start
+```
+### Maintenance
+```
+npm run start
+```

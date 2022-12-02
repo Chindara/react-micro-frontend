@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  backend:
+    build: ./backend
+    ports:
+      - 5000:5000
+  core:
+    build: ./core
+    ports:
+      - 8000:8000
+  maintenance:
+    build: ./maintenance
+    ports:
+      - 8001:8001
