@@ -9,3 +9,4 @@ This repository contains a sample that demonstrates the capabilities of Micro-fr
 ![NodeJS Version](https://img.shields.io/badge/node-v18.12.1-brightgreen)
 ![Docker Compatible](https://img.shields.io/badge/docker-compatible-blue)
 ![Docker-Compatible Compatible](https://img.shields.io/badge/docker--compose-available-blue)
+![Mongoose Version](https://img.shields.io/badge/mongoose-6.7.4-red)
