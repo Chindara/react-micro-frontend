@@ -1,27 +1,11 @@
-# react-micro-frontend
+# ReactJS Sample with Micro-frontend & Docker
 
-## Commands
-```
-npx create-mf-app
-```
+This repository contains a sample that demonstrates the capabilities of Micro-frontend architecture using ReactJS. 
 
-## Packages
-|Item|Version|
-|-|-|
-|NodeJS|18.12.1|
-|npm|9.1.2|
-
-## Build & Test
-
-### Backend
-```
-npm run start:dev
-```
-### Core
-```
-npm run start
-```
-### Maintenance
-```
-npm run start
-```
+## Compatibility
+![MongoDB Compatible](https://img.shields.io/badge/mongodb-compatible-success)
+![ExpressJS Version](https://img.shields.io/badge/express-4.16.1-lightgrey)
+![ReactJS Version](https://img.shields.io/badge/react-v17.0.2-brightgreen)
+![NodeJS Version](https://img.shields.io/badge/node-v18.12.1-brightgreen)
+![Docker Compatible](https://img.shields.io/badge/docker-compatible-blue)
+![Docker-Compatible Compatible](https://img.shields.io/badge/docker--compose-available-blue)
