@@ -1,48 +1,14 @@
-version: '3.8'
-
+version: "3.8"
 services:
   backend:
-    container_name: docubinet-backend
-    restart: unless-stopped
-    image: docubinet-backend:1
-    build:
-      context: backend
-      target: development
-      dockerfile: Dockerfile
+    build: ./backend
     ports:
       - 5000:5000
-    networks:
-      - shared-network
-
   core:
-    container_name: docubinet-core
-    restart: unless-stopped
-    image: docubinet-core:1
-    build:
-      context: core
-      target: development
-      dockerfile: Dockerfile
+    build: ./core
     ports:
       - 8000:8000
-    networks:
-      - shared-network
-    depends_on:
-      - backend
-
   maintenance:
-    container_name: docubinet-maintenance
-    restart: unless-stopped
-    image: docubinet-maintenance:1
-    build:
-      context: maintenance
-      target: development
-      dockerfile: Dockerfile
+    build: ./maintenance
     ports:
       - 8001:8001
-    networks:
-      - shared-network
-    depends_on:
-      - backend
-
-networks:
-  shared-network:
